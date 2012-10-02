@@ -1,0 +1,63 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>send http</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <script src="../../jquery/js/jquery-1.8.0.min.js"></script>
+        <script src="../../jquery/js/jquery-ui-1.8.23.custom.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../../jquery/css/theme/jquery-ui-1.8.23.custom.css" media="all">
+        <script type="text/javascript">
+            $(document).ready(function(){
+                
+                $("#sendreq").button();
+                
+                
+                $("#sendreq").click(function(){
+                    
+                    /*$.getJSON(
+                             $("#urlsend").val(),
+                             $("#requesttext").val(),
+                             function(json){
+                               console.info(json);
+                              });*/
+                    $.ajax({
+                              type: "POST",
+                              url: $("#urlsend").val(),
+                              data: $("#requesttext").val()
+                            }).done(function( msg ) {
+                              //alert( "Data Saved: " + msg );
+                              console.info(msg);
+                            });
+                    
+                    
+                });
+                
+                
+                
+                
+                
+            });
+            
+            
+        </script>
+        
+    </head>
+    <body>
+        
+        <input id="urlsend" placeholder="url to send request"  id="url_send" value="http://localhost:8080/Facade" ></input>
+        <br/>
+        <textarea id="requesttext" placeholder="insert here json" cols="80" rows="20" ></textarea>
+        <br/>
+        <button id="sendreq" value="send request....">send request....</button>
+        <br/>
+        <hr/>
+        <textarea placeholder="here put response the server" cols="20" rows="50"></textarea>
+        
+        
+    </body>
+</html>

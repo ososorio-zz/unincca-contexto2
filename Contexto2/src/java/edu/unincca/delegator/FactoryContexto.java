@@ -6,12 +6,14 @@ package edu.unincca.delegator;
 
 import edu.unincca.interfaces.IFactory;
 import edu.unincca.mauthentication.MAuthentication;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 
 /**
  *
@@ -42,12 +44,21 @@ public class FactoryContexto implements IFactory {
            
            setResponse(response);             
             
+      
+             StringBuilder jb = new StringBuilder();
+             String line = null;
+            
+             BufferedReader reader = request.getReader();
+             while ((line = reader.readLine()) != null)
+              jb.append(line);
+           
+           JSONObject jobject = new JSONObject(jb.toString());
+           
            IFactory action=null; 
             
             //ac:action
-           int actionRequest=Integer.parseInt( request.getParameter("ac") );
-      
-           EnumActions  actionToCall =EnumActions.fromInteger(actionRequest);
+          // int actionRequest=Integer.parseInt( request.getParameter("ac") );
+           EnumActions  actionToCall =EnumActions.fromInteger(jobject.getInt("ac"));
         
         
             if(actionToCall==null)
@@ -82,7 +93,7 @@ public class FactoryContexto implements IFactory {
         
          
             
-            action.processRequest(request, response);
+            action.processRequest(jobject,request, response);
         
         
         
@@ -123,6 +134,11 @@ public class FactoryContexto implements IFactory {
         writeResponse("{\"Error\":\"Pleaser Review the actions and operation\",   \"Mlogin\":[  {\"login\":{\"ac\":1,\"op\":1}},"
                 + "{\"lostPassword\":{\"ac\":1, \"op\": 2  }}  ]}");
         
+    }
+
+    @Override
+    public void processRequest(JSONObject jobject, HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 

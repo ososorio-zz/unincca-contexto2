@@ -28,11 +28,37 @@ public class Conex {
     Class.forName(driver);
     
     conn = DriverManager.getConnection(
-                   "jdbc:postgresql://localhost/ParcialContexto",
+                   "jdbc:postgresql://localhost/contexto2",
                    connectionProps);
     
     System.out.println("Connected to database");
     return conn;
 }
+   
+   
+  public ResultSet executeQuery(Connection con,PreparedStatement pre) throws SQLException  
+  {
+  
+     ResultSet resultado = pre.executeQuery();
+     con.close();
+     return resultado;
+  } 
+   
+  public int executeUpdate(Connection con,PreparedStatement pre) throws SQLException  
+  {
+  
+     int resultado = pre.executeUpdate();
+     con.close();
+     return resultado;
+  } 
+
+  public int[] executeBatch(Connection con,PreparedStatement pre) throws SQLException  
+  {
+  
+     int[] resultado = pre.executeBatch();
+     con.close();
+     return resultado;
+  }   
+  
     
 }

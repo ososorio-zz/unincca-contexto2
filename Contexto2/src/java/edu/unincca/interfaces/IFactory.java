@@ -6,6 +6,7 @@ package edu.unincca.interfaces;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 
 /**
  *
@@ -16,6 +17,7 @@ public interface IFactory {
     /*
      * Receive and process parameters
      */
-  abstract void processRequest(HttpServletRequest request, HttpServletResponse response);
-    
+  abstract void processRequest(JSONObject jobject, HttpServletRequest request, HttpServletResponse response);
+  abstract void processRequest( HttpServletRequest request, HttpServletResponse response);
+  
 }
