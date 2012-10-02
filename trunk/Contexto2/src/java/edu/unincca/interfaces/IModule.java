@@ -5,6 +5,7 @@
 package edu.unincca.interfaces;
 
 import javax.servlet.http.HttpServletRequest;
+import org.json.JSONObject;
 
 /**
  *
@@ -13,6 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface IModule {
     
     
-    String getResponse(HttpServletRequest request);
+    String getResponse( JSONObject jobject);
     
 }

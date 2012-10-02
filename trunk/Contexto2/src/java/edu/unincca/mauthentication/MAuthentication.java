@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 
 /**
  *
@@ -26,8 +27,17 @@ public class MAuthentication  implements IFactory{
      * 
      * 
      */
+            /*
+        {
+          "ac": 0,
+          "op": 0,
+          "data": {
+            "user": "test",
+            "pass": "test"
+          }
+        }
     
-    
+    */
     private HttpServletResponse _response;
 
     public HttpServletResponse getResponse() {
@@ -39,16 +49,16 @@ public class MAuthentication  implements IFactory{
     }
 
     @Override
-    public void processRequest(HttpServletRequest request, HttpServletResponse response) {
+    public void processRequest(JSONObject jobject,HttpServletRequest request, HttpServletResponse response) {
         
                
         try{
                 setResponse(response);
-            //ac:action
-           int action=Integer.parseInt( request.getParameter("ac") );
+            //op:operation
+          // int action=Integer.parseInt( request.getParameter("op") );
         
         
-           EnumOperations actionToCall = EnumOperations.fromInteger(action);
+           EnumOperations actionToCall = EnumOperations.fromInteger(jobject.getInt("op"));
         
         
             switch(actionToCall)
@@ -57,7 +67,7 @@ public class MAuthentication  implements IFactory{
                 case login:
 
                   //new MAuthentication().processRequest(request, response);
-                  writeResponse(new Login().getResponse(request));
+                  writeResponse(new Login().getResponse(jobject));
                     
 
                 break;
@@ -109,6 +119,11 @@ public class MAuthentication  implements IFactory{
                 writer.close();
             }
     
+    }
+
+    @Override
+    public void processRequest( HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     
