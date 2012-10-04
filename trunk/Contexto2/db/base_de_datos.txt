@@ -1,0 +1,84 @@
+drop table persona;
+
+-----------------------------
+drop table tipo_de_votacion;
+
+-----------------------------
+drop table partido;
+
+-----------------------------
+drop table candidato;
+
+-----------------------------
+drop table votacion;
+
+-----------------------------
+drop table votacion_persona;
+
+-----------------------------
+create sequence s_id_tipo_votacion;
+
+-----------------------------
+create sequence s_id_partido;
+
+-----------------------------
+create sequence s_id_votacion;
+
+-----------------------------
+create sequence s_id_votacion_persona;
+
+-----------------------------
+create table persona(
+cedula_persona integer not null primary key,
+nombre varchar(30),
+apellido varchar(30),
+password varchar(60),
+url_foto varchar(140)
+);
+
+-----------------------------
+create table tipo_de_votacion(
+id_tipo_votacion BIGINT PRIMARY KEY DEFAULT NEXTVAL('s_id_tipo_votacion'),
+nombre varchar(30),
+descripcion varchar(140)
+);
+-----------------------------
+create table partido(
+id_partido BIGINT PRIMARY KEY DEFAULT NEXTVAL('s_id_partido'),
+nombre varchar(30),
+url_logo varchar(140)
+);
+
+-------------------------------
+create table candidato(
+id_candidato integer not null primary key,
+cedula_persona integer,
+id_partido integer,
+FOREIGN KEY (cedula_persona) REFERENCES persona(cedula_persona),
+FOREIGN KEY (id_partido) REFERENCES partido(id_partido)
+);
+
+------------------------------------
+create table votacion(
+id_votacion BIGINT PRIMARY KEY DEFAULT NEXTVAL('s_id_votacion'),
+id_tipo_votacion integer,
+cedula_persona integer,
+descripcion varchar(140),
+fecha varchar(60),
+hora_apertura varchar(60),
+hora_cierre varchar(60),
+FOREIGN KEY (id_tipo_votacion) REFERENCES tipo_de_votacion(id_tipo_votacion)
+);
+
+------------------------------------
+create table votacion_persona(
+id_votacion_persona BIGINT PRIMARY KEY DEFAULT NEXTVAL('s_id_votacion_persona'),
+id_votacion integer,
+cedula_persona integer,
+FOREIGN KEY (id_votacion) REFERENCES votacion(id_votacion),
+FOREIGN KEY (cedula_persona) REFERENCES persona(cedula_persona)
+);
+
+--------------------------------------------
+insert into persona values(1026266020,'Giovanny','Martin','doom','C:\Users\doom\Desktop\bu.jpg');
+insert into persona values(1234,'natalia','sanchez','doom','C:\Users\doom\Desktop\bu.jpg');

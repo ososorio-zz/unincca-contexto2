@@ -31,7 +31,13 @@ and open the template in the editor.
                               data: $("#requesttext").val()
                             }).done(function( msg ) {
                               //alert( "Data Saved: " + msg );
-                              console.info(msg);
+                              //console.info(msg);
+                              try{
+                               $("#response").val(JSON.stringify(msg));
+                              }catch(e)
+                              {
+                               $("#response").val(msg);
+                              }
                             });
                     
                     
@@ -56,7 +62,7 @@ and open the template in the editor.
         <button id="sendreq" value="send request....">send request....</button>
         <br/>
         <hr/>
-        <textarea placeholder="here put response the server" cols="20" rows="50"></textarea>
+        <textarea id="response" placeholder="here put response the server" cols="80" rows="50"></textarea>
         
         
     </body>
