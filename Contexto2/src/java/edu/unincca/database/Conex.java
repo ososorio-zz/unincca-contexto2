@@ -28,7 +28,7 @@ public class Conex {
     Class.forName(driver);
     
     conn = DriverManager.getConnection(
-                   "jdbc:postgresql://localhost/contexto2",
+                   "jdbc:postgresql://localhost:5432/Contexto2",
                    connectionProps);
     
     System.out.println("Connected to database");
@@ -36,10 +36,11 @@ public class Conex {
 }
    
    
-  public ResultSet executeQuery(Connection con,PreparedStatement pre) throws SQLException  
+  public ResultSet executeQuery(Connection con,PreparedStatement pre,boolean enableClose) throws SQLException  
   {
   
      ResultSet resultado = pre.executeQuery();
+     if(enableClose)
      con.close();
      return resultado;
   } 
