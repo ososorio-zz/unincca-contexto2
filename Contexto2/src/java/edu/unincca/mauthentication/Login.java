@@ -6,6 +6,7 @@ package edu.unincca.mauthentication;
 
 
 import edu.unincca.database.Conex;
+import edu.unincca.database.ConexAmazon;
 import edu.unincca.interfaces.IModule;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -64,7 +65,7 @@ public class Login implements IModule{
                 *   AND password ='osorio'
                 */
                
-               Conex con = new Conex();
+               ConexAmazon con = new ConexAmazon();
                connection=con.getConnection();
                PreparedStatement statement= (PreparedStatement) connection.prepareStatement("select nombre,apellido,url_foto FROM persona WHERE cedula_persona=? AND password =?");
                
