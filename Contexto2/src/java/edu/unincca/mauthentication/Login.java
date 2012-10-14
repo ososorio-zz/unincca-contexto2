@@ -27,6 +27,8 @@ public class Login implements IModule{
     public String getResponse(JSONObject jobject) {
         
         Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet rs =  null;
         try {
             
             
@@ -67,7 +69,7 @@ public class Login implements IModule{
                
                ConexAmazon con = new ConexAmazon();
                connection=con.getConnection();
-               PreparedStatement statement= (PreparedStatement) connection.prepareStatement("select nombre,apellido,url_foto FROM persona WHERE cedula_persona=? AND password =?");
+               statement= (PreparedStatement) connection.prepareStatement("select nombre,apellido,url_foto FROM persona WHERE cedula_persona=? AND password =?");
                
                
                if(user !=null && pass != null && !user.equals("") && !pass.equals("")){
@@ -75,7 +77,7 @@ public class Login implements IModule{
                  statement.setInt(1,Integer.parseInt(user) );                     
                  statement.setString(2, pass);    
                  
-                 ResultSet rs= statement.executeQuery();
+                 rs= statement.executeQuery();
                 
                 while(rs.next())
                 {
@@ -84,8 +86,10 @@ public class Login implements IModule{
                    responsedb.put("name", rs.getString(1));
                    responsedb.put("lastname", rs.getString(2));
                    responsedb.put("url_picture", rs.getString(3));
-                   rs.close();
-                   statement.close();
+                   // yo los cierro por que solo debe obtener un usuario ustedes no lo deben cerrar ya que solo les traeria el primer resultado
+                   //solucion la puse en el finally
+                   //rs.close();
+                   //statement.close();
                    return new JSONObject().put("login", responsedb).toString();
                 }
          
@@ -111,6 +115,8 @@ public class Login implements IModule{
         {
             try {
                 connection.close();
+                rs.close();
+                statement.close();
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
