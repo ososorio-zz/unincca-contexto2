@@ -117,7 +117,7 @@ public class Login implements IModule{
                 connection.close();
                 rs.close();
                 statement.close();
-            } catch (SQLException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
