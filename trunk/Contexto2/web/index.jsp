@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
-    Created on : 17/10/2012, 12:24:00 PM
-    Author     : Marcela
+    Created on : 17-oct-2012, 20:35:04
+    Author     : ARBEY
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
