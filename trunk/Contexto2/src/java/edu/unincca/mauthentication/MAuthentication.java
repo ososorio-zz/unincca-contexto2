@@ -98,10 +98,7 @@ public class MAuthentication  implements IFactory{
         
            writeResponse(ex.getMessage().toString());
         }
-        
-        
-        
-        
+               
     }
     
     
@@ -121,10 +118,10 @@ public class MAuthentication  implements IFactory{
     
     }
 
-    @Override
-    public void processRequest( HttpServletRequest request, HttpServletResponse response) {
+    public void processRequest(HttpServletRequest request, HttpServletResponse response) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
+ 
     
 }
