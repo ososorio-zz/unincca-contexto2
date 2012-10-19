@@ -1,7 +1,4 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +15,7 @@ and open the template in the editor.
                 
                 
                 $("#sendreq").click(function(){
-                    
+             
                     /*$.getJSON(
                              $("#urlsend").val(),
                              $("#requesttext").val(),
@@ -27,10 +24,12 @@ and open the template in the editor.
                               });*/
                     $.ajax({
                               type: "POST",
-                              url: $("#urlsend").val(),
+                              url: "http://localhost:8084/Contexto2/Facade",
                               data: $("#requesttext").val()
+                           
+                              
                             }).done(function( msg ) {
-                              //alert( "Data Saved: " + msg );
+                              alert( "Data Saved: " + msg );
                               //console.info(msg);
                               try{
                                $("#response").val(JSON.stringify(msg));
@@ -55,7 +54,7 @@ and open the template in the editor.
     </head>
     <body>
         
-        <input id="urlsend" placeholder="url to send request"  id="url_send" value="http://localhost:8080/Facade" ></input>
+        <input id="urlsend" placeholder="url to send request"  value="http://localhost:8084/Contexto2/Facade" ></input>
         <br/>
         <textarea id="requesttext" placeholder="insert here json" cols="80" rows="20" ></textarea>
         <br/>
