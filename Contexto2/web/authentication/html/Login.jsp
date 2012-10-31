@@ -27,7 +27,7 @@
             <!--END SLIDE-IN ICONS-->
 
         <!--LOGIN FORM-->
-        <form name="login-form" class="login-form" action="" method="post">
+        <form name="login-form" class="login-form" >
 
                 <!--HEADER-->
             <div class="header">
