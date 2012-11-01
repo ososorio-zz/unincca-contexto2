@@ -1,0 +1,55 @@
+#summary One-sentence summary of this page.
+#labels JSON,Phase-Support
+
+= Introduction =
+
+EJEMPLOS JSON PARA EL USO DEL SERVIDOR
+
+
+== MODULO LOGIN ==
+Modulo encargado de realizar el login, cambiar la contraseña, recuperar la contraseña
+
+=== Login ===
+    {
+          "ac": 0,
+          "op": 0,
+          "data": {
+            "cedula": "111111",
+            "password": "pass"
+          }
+     }
+
+=== Lost Password ===
+      {
+          "ac": 0,
+          "op": 1,
+          "data": {
+            "cedula": "1030550748",
+            "nombre": "oscar",
+            "apellido":"osorio"
+          }
+        } 
+
+
+=== Change Password ===
+       {
+          "ac": 0,
+          "op": 2,
+          "data": {
+            "cedula": "11111111",
+            "oldpassword": "osorio",
+            "newpassword":"12345"
+          }
+        }
+
+
+
+
+
+
+
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
