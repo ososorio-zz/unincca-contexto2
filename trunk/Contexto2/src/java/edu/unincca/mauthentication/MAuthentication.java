@@ -27,13 +27,38 @@ public class MAuthentication  implements IFactory{
      * 
      * 
      */
-            /*
+     /*
         {
           "ac": 0,
           "op": 0,
           "data": {
-            "user": "test",
-            "pass": "test"
+            "cedula": "test",
+            "password": "test"
+          }
+        }
+         
+         
+         {
+          "ac": 0,
+          "op": 1,
+          "data": {
+            "cedula": "1030550748",
+            "nombre": "oscar",
+            "apellido":"osorio"
+          }
+        } 
+          
+         
+          
+          
+                  
+         {
+          "ac": 0,
+          "op": 2,
+          "data": {
+            "cedula": "1030550748",
+            "oldpassword": "osorio",
+            "newpassword":"12345"
           }
         }
     
@@ -65,19 +90,15 @@ public class MAuthentication  implements IFactory{
             {
 
                 case login:
-
-                  //new MAuthentication().processRequest(request, response);
                   writeResponse(new Login().getResponse(jobject));
-                    
-
                 break;
 
                 case changePassword:
-
+                  writeResponse(new ChangePassword().getResponse(jobject));
                 break;
 
                 case lostPassword:
-
+                  writeResponse(new LostPassword().getResponse(jobject));
                 break;
 
 

@@ -4,7 +4,7 @@
  */
 package edu.unincca.mauthentication;
 
-import edu.unincca.database.Conex;
+import edu.unincca.database.ConexAmazon;
 import edu.unincca.interfaces.IModule;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,76 +23,77 @@ public class LostPassword implements IModule{
 
     @Override
     public String getResponse(JSONObject jobject) {
-        
-         Connection connection = null;
-    try {
-            
-        
-           JSONObject jsonData= jobject.optJSONObject("data");
-           
-           String user = jsonData.getString("user");
-           String pass = jsonData.getString("oldpass"); 
-           String newpass = jsonData.getString("newpass"); 
-           
-           
-           if(   user !=null && pass != null 
-              && !user.equals("") && !pass.equals("")
-              && newpass!=null && !newpass.equals(""))
-           {
-           /*example  obtain valid user
-              SELECT cedula_persona
-                FROM persona
-                WHERE password='osorio'
-                AND cedula_persona=1030550748 
-           example change user
-                UPDATE persona
-                SET password= 'osorio1'
-                WHERE cedula_persona = 1030550748       
-            */  
-               
-             Conex con = new Conex();
-             connection=con.getConnection();
-             PreparedStatement statement= (PreparedStatement) connection.prepareStatement("select cedula_persona FROM persona WHERE cedula_persona=? AND password =?");
-               
-             statement.setInt(1,Integer.parseInt(user) );                     
-             statement.setString(2, pass);    
- 
-             ResultSet rs= statement.executeQuery();
-            
-             while(rs.next())
-             {
-               statement.close();
-               statement= (PreparedStatement) connection.prepareStatement("UPDATE persona SET password= ? WHERE cedula_persona = ? ");
-               statement.setString(1, newpass);                  
-               statement.setInt(2, rs.getInt(1));
-            
-               int result= statement.executeUpdate();
+         
+        Connection connection = null;
+        try {
 
-               statement.close();
+            JSONObject jsonData = jobject.optJSONObject("data");
 
-              return new JSONObject().put("changepassword", result).toString();            
-             }
-           }
-           
-          return new JSONObject().put("changepassword", "fail").toString();
+            String cedula = jsonData.getString("cedula");
+            String nombre = jsonData.getString("nombre");
+            String apellido = jsonData.getString("apellido");
+
+            
+            ConexAmazon con = new ConexAmazon();
+            connection = con.getConnection();
+                PreparedStatement statement = (PreparedStatement) connection.prepareStatement("select password FROM persona WHERE cedula_persona=? AND nombre=? AND apellido=?");
+
+                if (cedula != null && nombre != null && apellido != null && !cedula.equals("") && !nombre.equals("") && !apellido.equals("")) {
+
+                    statement.setInt(1, Integer.parseInt(cedula));
+                    statement.setString(2, nombre);
+                    statement.setString(3, apellido);
+                    
+                    ResultSet rs = statement.executeQuery();
+
+                    JSONObject response=new JSONObject();
+                         
+                    while (rs.next()) {
+                        response.put("password", rs.getString(1));
+                    }
+                    rs.close();
+                    statement.close();
+                    System.out.println(response.length());
+                    return new JSONObject().put("LostPassword", (response.length() >= 1)?"true":"false").put("password",(response.length() >= 1)?response.get("password"):"").toString();                    
+                }
+                return new JSONObject().put("LostPassword","false").put("cause", "review json").toString();
+                
         } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LostPassword.class.getName()).log(Level.SEVERE, null, ex);
+            return ex.getMessage();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LostPassword.class.getName()).log(Level.SEVERE, null, ex);
+            return ex.getMessage();
         } catch (JSONException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } finally
-        {
+            Logger.getLogger(LostPassword.class.getName()).log(Level.SEVERE, null, ex);
+            return ex.getMessage();
+        }
+         catch (NumberFormatException ex) {
+            Logger.getLogger(LostPassword.class.getName()).log(Level.SEVERE, null, ex);
+           //   return new JSONObject().put("login","false").put("cause", "user or password incorrect").toString();
+           try{
+          return new JSONObject().put("LostPassword","false").put("cause", "Review user is only number not text").toString();
+            } catch (Exception ex1) {  }
+        }
+        finally {
             try {
-                connection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                if(connection != null) {
+                    connection.close();
+                }
+            } catch (Exception ex) {
+               // Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+     
         
-        return "";
         
-        
+        try{
+          return new JSONObject().put("LostPassword","false").put("cause", "Review your json").toString();
+        } catch (JSONException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    
     }
 
     
