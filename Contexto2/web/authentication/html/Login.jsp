@@ -27,26 +27,26 @@
             <!--END SLIDE-IN ICONS-->
 
         <!--LOGIN FORM-->
-        <form name="login-form" class="login-form" >
+        <form name="login-form" class="login-form" action="javascript:void(0)" method="post">
 
                 <!--HEADER-->
             <div class="header">
-            <!--TITLE--><h1>Login Form</h1><!--END TITLE-->
-            <!--DESCRIPTION--><span>Fill out the form below to login to my super awesome imaginary control panel.</span><!--END DESCRIPTION-->
+            <!--TITLE--><h1>Sistema de votación</h1><!--END TITLE-->
+            <!--DESCRIPTION--><span>Ingrese su cedula y contrasena para poder ingresar al sistema.</span><!--END DESCRIPTION-->
             </div>
             <!--END HEADER-->
 
                 <!--CONTENT-->
             <div class="content">
-                <!--USERNAME--><input name="username" type="text" class="input username" value="Username" onfocus="this.value=''" /><!--END USERNAME-->
-            <!--PASSWORD--><input name="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
+                <!--USERNAME--><input name="username" type="text" class="input username" value="Cedula" onfocus="this.value=''" /><!--END USERNAME-->
+                <!--PASSWORD--><input name="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
             </div>
             <!--END CONTENT-->
 
             <!--FOOTER-->
             <div class="footer">
-            <!--LOGIN BUTTON--><input type="submit" name="submit" value="Login" class="button" /><!--END LOGIN BUTTON-->
-            <!--REGISTER BUTTON--><input type="submit" name="submit" value="Register" class="register" /><!--END REGISTER BUTTON-->
+            <!--LOGIN BUTTON--><input type="submit" id="login" name="submit" value="Ingreso" class="button" /><!--END LOGIN BUTTON-->
+            <!--REGISTER BUTTON--><input type="submit" name="submit" value="Olvido su contrasena?" class="register" /><!--END REGISTER BUTTON-->
             </div>
             <!--END FOOTER-->
 
