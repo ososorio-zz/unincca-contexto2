@@ -38,8 +38,8 @@
 
                 <!--CONTENT-->
             <div class="content">
-                <!--USERNAME--><input name="username" type="text" class="input username" value="Cedula" onfocus="this.value=''" /><!--END USERNAME-->
-                <!--PASSWORD--><input name="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
+                <!--USERNAME--><input name="username" type="text" class="input username" value="Cedula" onfocus="this.value=''" placeholder="Cedula"/><!--END USERNAME-->
+                <!--PASSWORD--><input name="password" type="password" class="input password" value="Password" onfocus="this.value=''" placeholder="Password"/><!--END PASSWORD-->
             </div>
             <!--END CONTENT-->
 
