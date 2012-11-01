@@ -24,12 +24,12 @@
                               });*/
                     $.ajax({
                               type: "POST",
-                              url:  $("#urlsend").val(),//"http://localhost:8084/Contexto2/Facade",
+                              url: $("#urlsend").val(),
                               data: $("#requesttext").val()
                            
                               
                             }).done(function( msg ) {
-                              alert( "Data Saved: " + msg );
+                             // alert( "Data Saved: " + msg );
                               //console.info(msg);
                               try{
                                $("#response").val(JSON.stringify(msg));
@@ -54,7 +54,7 @@
     </head>
     <body>
         
-        <input id="urlsend" placeholder="url to send request"  value="http://localhost:8084/Contexto2/Facade" ></input>
+        <input id="urlsend" placeholder="url to send request"  value="http://localhost:8080/Contexto2/Facade" ></input>
         <br/>
         <textarea id="requesttext" placeholder="insert here json" cols="80" rows="20" ></textarea>
         <br/>
