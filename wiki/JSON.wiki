@@ -10,16 +10,20 @@ EJEMPLOS JSON PARA EL USO DEL SERVIDOR
 Modulo encargado de realizar el login, cambiar la contraseña, recuperar la contraseña
 
 === Login ===
-    `{
+<code language="json">
+
+    {
           "ac": 0,
           "op": 0,
           "data": {
             "cedula": "111111",
             "password": "pass"
           }
-     }`
+     }
+</code>
 
 === Lost Password ===
+<code language="json">
       {
           "ac": 0,
           "op": 1,
@@ -29,9 +33,11 @@ Modulo encargado de realizar el login, cambiar la contraseña, recuperar la cont
             "apellido":"osorio"
           }
         } 
+</code>
 
 
 === Change Password ===
+<code language="json">
        {
           "ac": 0,
           "op": 2,
@@ -41,7 +47,7 @@ Modulo encargado de realizar el login, cambiar la contraseña, recuperar la cont
             "newpassword":"12345"
           }
         }
-
+</code>
 
 
 
