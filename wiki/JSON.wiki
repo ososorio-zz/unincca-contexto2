@@ -10,14 +10,14 @@ EJEMPLOS JSON PARA EL USO DEL SERVIDOR
 Modulo encargado de realizar el login, cambiar la contraseña, recuperar la contraseña
 
 === Login ===
-    {
+    `{
           "ac": 0,
           "op": 0,
           "data": {
             "cedula": "111111",
             "password": "pass"
           }
-     }
+     }`
 
 === Lost Password ===
       {
