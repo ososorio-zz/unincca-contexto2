@@ -121,7 +121,7 @@ HEADER
 .login-form .header h1 {
 	font-family: 'Bree Serif', serif;
 	font-weight: 300;
-	font-size: 28px;
+	font-size: 26px;
 	line-height:34px;
 	color: #414848;
 	text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
@@ -234,6 +234,7 @@ FOOTER
 
 /* Login button */
 .login-form .footer .button {
+        width: 100%;
 	float:right;
 	padding: 11px 25px;
 	
@@ -275,6 +276,9 @@ FOOTER
 
 /* Register button */
 .login-form .footer .register {
+    
+        top:19px;
+        position: relative;
 	display: block;
 	float: right;
 	padding: 10px;
