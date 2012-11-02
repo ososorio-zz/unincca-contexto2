@@ -56,19 +56,21 @@ $(document).ready(function() {
         });
         
         
-        $("#login").click(function(){
+        
+        
+       $("#login").click(function(){
             
          var user=   $('input[name="username"]').val();
          var pass=   $('input[name="password"]').val();
          
-         var json=  {
-           "ac": 0,
-           "op": 0,
-           "data": {
-             "cedula": user,
-             "password": pass
-           }
-      }
+                var json=  {
+                  "ac": 0,
+                  "op": 0,
+                  "data": {
+                    "cedula": user,
+                    "password": pass
+                  }
+             }
              $.ajax({
                               type: "POST",
                               url: "../../Facade",
