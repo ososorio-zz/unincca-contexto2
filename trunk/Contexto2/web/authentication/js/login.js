@@ -20,7 +20,7 @@ $(document).ready(function() {
 	});
         
         
-        
+        //evitar el uso de letras
         $(".username").keydown(function(event) {
             // Allow: backspace, delete, tab, escape, and enter
             if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 || 
@@ -40,7 +40,7 @@ $(document).ready(function() {
         });
         
         
-      
+        //crea el obeto dialog
         $( "#dialog" ).dialog({
             autoOpen: false,
             show: "blind",
@@ -57,7 +57,7 @@ $(document).ready(function() {
         
         
         
-        
+        //envia json cuando se realiza click sobre login
        $("#login").click(function(){
             
          var user=   $('input[name="username"]').val();
@@ -105,3 +105,6 @@ $(document).ready(function() {
         
         
 });
+
+
+
