@@ -58,5 +58,12 @@
 
         <!--GRADIENT--><div class="gradient"></div><!--END GRADIENT-->
 
+        
+         
+        <div id="dialog" title="Basic dialog">
+            <p class="contentM"></p>
+        </div>
+
+        
     </body>
 </html>
