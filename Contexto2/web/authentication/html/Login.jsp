@@ -78,8 +78,8 @@
              <form action="javascript:void(0);" class="login-form lostPassword">
                 <div class="content lostPassword">
                  <input type="text"     class="input username" placeholder="Cedula"></input>
-                 <input type="password" class="input nombre" placeholder="Nombre"></input>
-                 <input type="password" class="input apellido" placeholder="Apellido"></input>
+                 <input type="text" class="input nombre" placeholder="Nombre"></input>
+                 <input type="text" class="input apellido" placeholder="Apellido"></input>
                 </div>
              </form>
         </div>       

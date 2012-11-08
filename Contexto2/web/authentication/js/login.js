@@ -5,23 +5,20 @@
 
 
 $(document).ready(function() {
-	$(".username").focus(function() {
-		$(".user-icon").css("left","-48px");
-	});
-	$(".username").blur(function() {
-		$(".user-icon").css("left","0px");
-	});
-
-	$(".password").focus(function() {
-		$(".pass-icon").css("left","-48px");
-	});
-	$(".password").blur(function() {
-		$(".pass-icon").css("left","0px");
-	});
+    loginObject.init();
+    loginObject.initButtons();
+    loginObject.initDialogs();
+    loginObject.initEffects();
+});
 
 
-        //evitar el uso de letras
-        $(".username").keydown(function(event) {
+
+
+
+loginObject={
+    init:function(){
+          //funcion solo permite digitar numeros
+         $(".username").keydown(function(event) {
             // Allow: backspace, delete, tab, escape, and enter
             if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||
                  // Allow: Ctrl+A
@@ -37,10 +34,25 @@ $(document).ready(function() {
                     event.preventDefault();
                 }
             }
-        });
-
-
-        //crea el obeto dialog
+         });
+        
+    },
+    initEffects:function(){
+ 	$(".username").focus(function() {
+            $(".user-icon").css("left","-48px");
+	});
+	$(".username").blur(function() {
+            $(".user-icon").css("left","0px");
+	});
+	$(".password").focus(function() {
+            $(".pass-icon").css("left","-48px");
+	});
+	$(".password").blur(function() {
+            $(".pass-icon").css("left","0px");
+	});       
+    },
+    initDialogs:function(){
+        //dialogo para informacion varia
         $( "#dialog" ).dialog({
             autoOpen: false,
             show: "blind",
@@ -53,10 +65,9 @@ $(document).ready(function() {
                     $( this ).dialog( "close" );
                 }
             }
-        });
-
-
-           //crea el obeto dialog
+        });  
+        
+        //crea el dialogo para cambiar el password
         $( "#dialogChangePasword" ).dialog({
             autoOpen: false,
             show: "blind",
@@ -74,7 +85,7 @@ $(document).ready(function() {
             buttons: {
                 "Cambiar": function() {
                     $( this ).dialog( "close" );
-                    changePassword();
+                    loginObject.changePassword();
                 },
                 "Cancelar": function(){
                     $( this ).dialog( "close" );
@@ -84,7 +95,8 @@ $(document).ready(function() {
             }
         });
 
-      $( "#dialogLostPasword" ).dialog({
+       //crear el dialogo para recordar password
+       $( "#dialogLostPasword" ).dialog({
             autoOpen: false,
             show: "blind",
             hide: "explode",
@@ -101,7 +113,7 @@ $(document).ready(function() {
             buttons: {
                 "Recuperar": function() {
                     $( this ).dialog( "close" );
-                    lostPassword();
+                    loginObject.lostPassword();
                 },
                 "Cancelar": function(){
                     $( this ).dialog( "close" );
@@ -109,137 +121,72 @@ $(document).ready(function() {
             }
         });
         
+        
+    },
+    initButtons:function(){
+       //agrega el evento para el recordar password
        $(".register").click(function(){
            $( "#dialogLostPasword" ).dialog("open")
        });
-        
-
-        //envia json cuando se realiza click sobre login
+       //asigna evento a boton login
        $("#login").click(function(){
+           loginObject.loginAjax();
+       });
+        
+    },
+    
+    loginAjax:function(){
+     var user=   $('input[name="username"]').val();
+     var pass=   $('input[name="password"]').val();
 
-         var user=   $('input[name="username"]').val();
-         var pass=   $('input[name="password"]').val();
+            var json=  {
+              "ac": 0,
+              "op": 0,
+              "data": {
+                "cedula": user,
+                "password": pass
+              }
+         }
+         loginObject.sendAjax(json, function(response){
 
-                var json=  {
-                  "ac": 0,
-                  "op": 0,
-                  "data": {
-                    "cedula": user,
-                    "password": pass
-                  }
-             }
-             $.ajax({
-                              type: "POST",
-                              url: "../../Facade",
-                              data: JSON.stringify(json),
-                              contentType: "application/json; charset=utf-8",
-                              dataType: "json"
-
-                            }).done(function( msg ) {
-
-                              try{
-                              console.info(msg);
-
-                              if(msg.login=="false")
-                                  {
-                                   $(".contentM").html(msg.cause);
-                                   $( "#dialog" ).dialog("open");
-                                  }
-                              else
-                                  {
-                                    if(msg.userInfo && msg.userInfo.last_login == "0")
-                                        {
-                                           $("#dialogChangePasword .input.username").val(user);
-                                           $( "#dialogChangePasword" ).dialog("open");  
-                                            
-                                        }
-                                        else if(msg.userInfo.type="0")
-                                            {
-                                                alert("redirect to user");
-                                                //type
-                                            }
-                                       else if(msg.userInfo.type="1")
-                                            {
-                                                alert("redirect to admin");
-                                                //type
-                                            } 
-                                           
-                              
-                                  }
-
-
-                              }catch(e)
-                              {
-                               console.info(msg);
-                              }
-                            });
-
-        });
-
-
-   function changePassword(){
-       var context=$("#dialogChangePasword");
-
-       var cedula=      $(".input.username",context).val();
-       var oldPassword= $(".input.oldpassword",context).val();
-       var newPassword= $(".input.newpassword",context).val();
-
-         //verificar que no sea nulos
-       var json={
-          "ac": 0,
-          "op": 2,
-          "data": {
-            "cedula": cedula,
-            "oldpassword": oldPassword,
-            "newpassword": newPassword
-          }};
-
-          $.ajax({
-                  type: "POST",
-                  url: "../../Facade",
-                  data: JSON.stringify(json),
-                  contentType: "application/json; charset=utf-8",
-                  dataType: "json"
-
-                }).done(function( response ) {
-
-                  try{
-                  console.info(response);
-                  
-                  if(response.changePassword=="true")
-                      {
-                          alert("Cambio exitoso");
-                          
-                      }
-                  else
-                      {
-                        $(".contentM").html(response.cause);
-                         $( "#dialog" ).dialog("open");  
-                          
-                      }
-                 
-
-
-                  }catch(e)
+              if(response.login=="false")
                   {
-                   console.info(response);
+                   $(".contentM").html(response.cause);
+                   $( "#dialog" ).dialog("open");
                   }
-                });
+              else
+              {
+                if(response.userInfo && response.userInfo.last_login == "0")
+                    {
+                        loginObject.type=response.userInfo.type;
+                       $("#dialogChangePasword .input.username").val(user);
+                       $( "#dialogChangePasword" ).dialog("open");  
 
+                    }
+                    else if(response.userInfo.type="0")
+                        {
+                            alert("redirect to user");
+                            //type
+                        }
+                   else if(response.userInfo.type="1")
+                        {
+                            alert("redirect to admin");
+                            //type
+                        } 
+              }
 
-   }
-   
-   
-   function lostPassword()
-   {
-       var context=$("#dialogLostPasword");
-
-       var cedula=      $(".input.username",context).val();
-       var nombre= $(".input.nombre",context).val();
-       var apellido= $(".input.apellido",context).val();
+         }, function(response){
+             alert(response);
+         });
+    },
+    lostPassword:function(){
+        var context=$("#dialogLostPasword");
+        var cedula=      $(".input.username",context).val();
+        var nombre= $(".input.nombre",context).val();
+        var apellido= $(".input.apellido",context).val();
 
          //verificar que no sea nulos
-       var json={
+        var json={
           "ac": 0,
           "op": 1,
           "data": {
@@ -248,43 +195,73 @@ $(document).ready(function() {
             "apellido":apellido
           }
         } 
+        loginObject.sendAjax(json,function(response){
+            if(response.LostPassword=="true")
+              {
+                 $(".contentM").html("Su contrasena es:"+response.password);
+                 $( "#dialog" ).dialog("open");       
+              }
+            else
+              {
+                $(".contentM").html(response.cause);
+                $( "#dialog" ).dialog("open");     
+              }                
 
-          $.ajax({
-                  type: "POST",
-                  url: "../../Facade",
-                  data: JSON.stringify(json),
-                  contentType: "application/json; charset=utf-8",
-                  dataType: "json"
+            
+        },function(response){
+            alert(response);
+        });
+    },
+    changePassword:function(){
+        
+      var context=$("#dialogChangePasword");
 
-                }).done(function( response ) {
+      var cedula=      $(".input.username",context).val();
+      var oldPassword= $(".input.oldpassword",context).val();
+      var newPassword= $(".input.newpassword",context).val();
 
-                  try{
-                  console.info(response);
-                  
-                  if(response.LostPassword=="true")
-                      {
-                         $(".contentM").html("Su contrasena es:"+response.password);
-                         $( "#dialog" ).dialog("open");       
-                      }
-                  else
-                      {
-                        $(".contentM").html(response.cause);
-                        $( "#dialog" ).dialog("open");     
-                      }                
-
-                  }catch(e)
-                  {
-                   console.info(response);
-                  }
-                });
+      //verificar que no sea nulos
+      var json={
+         "ac": 0,
+         "op": 2,
+         "data": {
+                 "cedula": cedula,
+                 "oldpassword": oldPassword,
+                 "newpassword": newPassword
+      }};
+      loginObject.sendAjax(json,function(response){
        
-   }
+          if(response.changePassword=="true")
+              {
+                  alert("Cambio exitoso typo usuario"+loginObject.type);
+              }
+          else
+              {
+                $(".contentM").html(response.cause);
+                $( "#dialog" ).dialog("open");  
+              }
 
+                  
+      },function(response){
+          alert(response);
+      });
+        
+    },
+    
+    sendAjax:function(json,callbackDone,callbackfail){
+        
+        $.ajax({
+              type: "POST",
+              url: "../../Facade",
+              data: JSON.stringify(json),
+              contentType: "application/json; charset=utf-8",
+              dataType: "json"
 
-
-
-
-});
-
-
-
+            }).done(function( response ) {
+                callbackDone(response);
+            })
+            .fail(function(response){
+                callbackfail(response);
+            });  
+    }
+};
