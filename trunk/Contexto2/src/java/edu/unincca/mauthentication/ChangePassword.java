@@ -9,6 +9,7 @@ import edu.unincca.interfaces.IModule;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONException;
@@ -23,6 +24,8 @@ public class ChangePassword implements IModule{
     @Override
     public String getResponse(JSONObject jobject) {
          Connection connection = null;
+          PreparedStatement statement =null;
+          PreparedStatement statementLastLogin = null;
         try {
 
             JSONObject jsonData = jobject.optJSONObject("data");
@@ -34,7 +37,7 @@ public class ChangePassword implements IModule{
                 ConexAmazon con = new ConexAmazon();
                 connection = con.getConnection();
              
-                PreparedStatement statement = (PreparedStatement) connection.prepareStatement("update persona set password=? WHERE cedula_persona=? AND password =?");
+                statement = (PreparedStatement) connection.prepareStatement("update persona set password=? WHERE cedula_persona=? AND password =?");
                
                 if (user != null && oldpass != null && newpass != null && !user.equals("") && !oldpass.equals("") && !newpass.equals("")) {
 
@@ -44,6 +47,15 @@ public class ChangePassword implements IModule{
 
                     int rs= statement.executeUpdate();
                     
+                    if(rs==1)
+                    {
+                     statementLastLogin = (PreparedStatement) connection.prepareStatement("update persona set last_login=? WHERE cedula_persona=? AND password =?");
+                     statementLastLogin.setLong(1, new Date().getTime());
+                     statementLastLogin.setInt(2, Integer.parseInt(user));
+                     statementLastLogin.setString(3, newpass);
+                     statementLastLogin.executeUpdate();
+                    }
+                                                                 
                     return new JSONObject().put("changePassword",(rs==0)?"false":"true").put("cause", (rs==0)?"Review your user and password":"ok").toString();               
        
                 }
@@ -67,9 +79,20 @@ public class ChangePassword implements IModule{
         }
         finally {
             try {
+                
                 if(connection != null) {
                     connection.close();
                 }
+                
+                if(statement != null) {
+                    statement.close();
+                }
+                
+                 if(statement != null) {
+                    statementLastLogin.close();
+                }
+                
+                
             } catch (Exception ex) { }
         }
      
