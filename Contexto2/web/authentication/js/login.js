@@ -121,7 +121,6 @@ loginObject={
             }
         });
         
-        
     },
     initButtons:function(){
        //agrega el evento para el recordar password
@@ -158,20 +157,17 @@ loginObject={
               {
                 if(response.userInfo && response.userInfo.last_login == "0")
                     {
-                        loginObject.type=response.userInfo.type;
+                       loginObject.type=response.userInfo.type;
                        $("#dialogChangePasword .input.username").val(user);
                        $( "#dialogChangePasword" ).dialog("open");  
-
                     }
                     else if(response.userInfo.type="0")
                         {
-                            alert("redirect to user");
-                            //type
+                             loginObject.redirectToUser();
                         }
                    else if(response.userInfo.type="1")
                         {
-                            alert("redirect to admin");
-                            //type
+                            loginObject.redirectToAdmin();
                         } 
               }
 
@@ -234,6 +230,14 @@ loginObject={
           if(response.changePassword=="true")
               {
                   alert("Cambio exitoso typo usuario"+loginObject.type);
+                  if(loginObject.type=="1")
+                      {
+                          loginObject.redirectToAdmin();
+                      }
+                      else
+                          {
+                             loginObject.redirectToUser();
+                          }
               }
           else
               {
@@ -263,5 +267,11 @@ loginObject={
             .fail(function(response){
                 callbackfail(response);
             });  
+    },
+    redirectToAdmin:function(){
+        alert("redirect to admin");
+    },
+    redirectToUser:function(){
+        alert("redirect to user");
     }
 };
