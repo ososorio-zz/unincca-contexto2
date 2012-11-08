@@ -22,17 +22,31 @@ Modulo encargado de realizar el login, cambiar la contraseña, recuperar la cont
      }
 </code>
 
+response
+<code language="json">
+{
+    "login": "true",
+    "userInfo": {
+        "name": "oscar",
+        "lastname": "osorio",
+        "type": "0",
+        "last_login": "0"
+    }
+}
+</code>
+
 === Lost Password ===
 <code language="json">
-      {
-          "ac": 0,
-          "op": 1,
-          "data": {
-            "cedula": "1030550748",
-            "nombre": "oscar",
-            "apellido":"osorio"
-          }
-        } 
+{
+    "login": "true",
+    "userInfo": {
+        "name": "oscar",
+        "lastname": "osorio",
+        "type": "0", //si es 0 es usuario si es 1 es admin
+        "last_login": "0"  // 0 si nunca a tenido un login si no es las fecha en timestamp
+        "url_picture": "http://image" //imagen alojada en el servidor o pagina web
+    }
+}
 </code>
 
 
