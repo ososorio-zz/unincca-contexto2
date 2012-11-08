@@ -53,6 +53,15 @@ public class LostPassword implements IModule{
                     }
                     rs.close();
                     statement.close();
+                    
+                    statement = (PreparedStatement) connection.prepareStatement("UPDATE persona set last_login=0 WHERE  cedula_persona=? AND nombre=? AND apellido=?");
+                    statement.setInt(1, Integer.parseInt(cedula));
+                    statement.setString(2, nombre);
+                    statement.setString(3, apellido);
+                    
+                    statement.executeUpdate();
+                    statement.close();
+                    
                     System.out.println(response.length());
                     return new JSONObject().put("LostPassword", (response.length() >= 1)?"true":"false").put("password",(response.length() >= 1)?response.get("password"):"").toString();                    
                 }

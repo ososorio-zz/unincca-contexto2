@@ -60,10 +60,30 @@
 
         
          
-        <div id="dialog" title="Basic dialog">
+        <div id="dialog" title="Informacion">
             <p class="contentM"></p>
         </div>
 
+         <div id="dialogChangePasword" title="Cambiar contrasena">
+             <form action="javascript:void(0);" class="login-form changePassword">
+                <div class="content changePassword">
+                 <input type="text"     class="input username" placeholder="Cedula"></input>
+                 <input type="password" class="input password oldpassword" placeholder="Password Antiguo"></input>
+                 <input type="password" class="input password newpassword" placeholder="Password Nuevo"></input>
+                </div>
+             </form>
+        </div>
+        
+         <div id="dialogLostPasword" title="Recuperar contrasena">
+             <form action="javascript:void(0);" class="login-form lostPassword">
+                <div class="content lostPassword">
+                 <input type="text"     class="input username" placeholder="Cedula"></input>
+                 <input type="password" class="input nombre" placeholder="Nombre"></input>
+                 <input type="password" class="input apellido" placeholder="Apellido"></input>
+                </div>
+             </form>
+        </div>       
+        
         
     </body>
 </html>

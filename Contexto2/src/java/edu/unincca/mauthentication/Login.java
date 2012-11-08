@@ -37,7 +37,7 @@ public class Login implements IModule {
                  */
                 ConexAmazon con = new ConexAmazon();
                 connection = con.getConnection();
-                PreparedStatement statement = (PreparedStatement) connection.prepareStatement("select nombre,apellido,url_foto FROM persona WHERE cedula_persona=? AND password =?");
+                PreparedStatement statement = (PreparedStatement) connection.prepareStatement("select nombre,apellido,url_foto,tipo,last_login FROM persona WHERE cedula_persona=? AND password =?");
 
                 if (user != null && pass != null && !user.equals("") && !pass.equals("")) {
 
@@ -52,6 +52,9 @@ public class Login implements IModule {
                         responsedb.put("name", rs.getString(1));
                         responsedb.put("lastname", rs.getString(2));
                         responsedb.put("url_picture", rs.getString(3));
+                        responsedb.put("type", rs.getString(4));
+                        responsedb.put("last_login", rs.getString(5));
+                        
                         /*esto solo aplica para este caso
                          * este codigo debe ir por fuera del while
                          */

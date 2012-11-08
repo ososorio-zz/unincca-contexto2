@@ -47,12 +47,12 @@ body {
 #wrapper {
 	/* Center wrapper perfectly */
 	width: 300px;
-	height: 400px;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -150px;
-	margin-top: -200px;
+        height: 460px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -150px;
+        margin-top: -230px;
 }
 
 /*
@@ -302,4 +302,27 @@ FOOTER
 .login-form .footer .register:focus {
 	position: relative;
 	bottom: -1px;
+}
+
+/********
+changePassword
+**********/
+
+.login-form.changePassword,
+.login-form.lostPassword
+{
+	width: 280px;
+        z-index: 0;
+        top: 50px;
+}
+
+.login-form .content.changePassword,
+.login-form .content.lostPassword
+{
+    padding: 20px 0px 19px 19px;
+    
+}
+
+.login-form .content .nombre, .login-form .content .apellido {
+	margin-top: 25px;
 }
