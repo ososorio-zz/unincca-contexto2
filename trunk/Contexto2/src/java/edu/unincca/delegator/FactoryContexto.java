@@ -100,7 +100,7 @@ public class FactoryContexto implements IFactory {
 
         } catch (Exception ex) {
 
-            writeResponse(ex.getMessage().toString());
+            writeResponse("Invalid JSON"+ex.getMessage().toString());
         }
 
     }
