@@ -275,7 +275,8 @@ FOOTER
 }
 
 /* Register button */
-.login-form .footer .register {
+.login-form .footer .register,
+.login-form .footer .openf {
     
         top:19px;
         position: relative;
@@ -295,11 +296,13 @@ FOOTER
 	text-shadow: 0px 1px 0 rgba(256,256,256,0.5);
 }
 
-.login-form .footer .register:hover {
+.login-form .footer .register:hover,
+.login-form .footer .openf:hover {
 	color: #3f9db8;
 }
 
-.login-form .footer .register:focus {
+.login-form .footer .register:focus,
+.login-form .footer .openf:focus{
 	position: relative;
 	bottom: -1px;
 }
