@@ -1,3 +1,6 @@
+/*plugin jquery redirect*/
+(function(d){d.fn.redirect=function(a,b,c){void 0!==c?(c=c.toUpperCase(),"GET"!=c&&(c="POST")):c="POST";if(void 0===b||!1==b)b=d().parse_url(a),a=b.url,b=b.params;var e=d("<form></form");e.attr("method",c);e.attr("action",a);for(var f in b)a=d("<input />"),a.attr("type","hidden"),a.attr("name",f),a.attr("value",b[f]),a.appendTo(e);d("body").append(e);e.submit()};d.fn.parse_url=function(a){if(-1==a.indexOf("?"))return{url:a,params:{}};var b=a.split("?"),a=b[0],c={},b=b[1].split("&"),e={},d;for(d in b){var g= b[d].split("=");e[g[0]]=g[1]}c.url=a;c.params=e;return c}})(jQuery);
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -131,6 +134,10 @@ loginObject={
        $("#login").click(function(){
            loginObject.loginAjax();
        });
+       //funciones abiertas
+       $(".openf").click(function(){
+           window.location.href="../../FunctionsOpen/html/index.jsp";
+       });
         
     },
     
@@ -155,18 +162,25 @@ loginObject={
                   }
               else
               {
+               if(response.userInfo){
+                  loginObject.userInfo =response.userInfo;
+                  }
+                  
                 if(response.userInfo && response.userInfo.last_login == "0")
                     {
                        loginObject.type=response.userInfo.type;
+                       
                        $("#dialogChangePasword .input.username").val(user);
                        $( "#dialogChangePasword" ).dialog("open");  
                     }
                     else if(response.userInfo.type="0")
                         {
+                             
                              loginObject.redirectToUser();
                         }
                    else if(response.userInfo.type="1")
                         {
+                            
                             loginObject.redirectToAdmin();
                         } 
               }
@@ -270,8 +284,14 @@ loginObject={
     },
     redirectToAdmin:function(){
         alert("redirect to admin");
+        window.location.href="../../Admin/html/index.jsp";
     },
     redirectToUser:function(){
         alert("redirect to user");
+       // window.location.href="../../Vote/html/index.jsp";
+       $().redirect("../../Vote/html/index.jsp", loginObject.userInfo, 'POST');
+
     }
 };
+
+

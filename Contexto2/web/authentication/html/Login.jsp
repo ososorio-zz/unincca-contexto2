@@ -47,6 +47,8 @@
             <div class="footer">
             <!--LOGIN BUTTON--><input type="submit" id="login" name="submit" value="Ingreso" class="button" /><!--END LOGIN BUTTON-->
             <!--REGISTER BUTTON--><input type="submit" name="submit" value="Olvido su contrasena?" class="register" /><!--END REGISTER BUTTON-->
+            <!--Function open--><input type="submit" name="submit" value="Funciones Abiertas...." class="openf" /><!--END REGISTER BUTTON-->
+
             </div>
             <!--END FOOTER-->
 
