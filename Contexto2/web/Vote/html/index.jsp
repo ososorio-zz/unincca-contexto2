@@ -13,17 +13,6 @@
          <script src="../../jquery/js/jquery-1.8.0.min.js"></script>
         <script src="../../jquery/js/jquery-ui-1.8.23.custom.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../../jquery/css/theme/jquery-ui-1.8.23.custom.css" media="all">
-        
-    </head>
-    <body>
-        <h1>Hello Vote!</h1>
-        
-        <%=request.getParameter("name")%>
-        <%=request.getParameter("lastname")%>
-        <%=request.getParameter("type")%>
-        <%=request.getParameter("last_login")%>
-        <%=request.getParameter("cedula")%>
-        
         <script type="text/javascript">
             
             var userInfo={
@@ -39,6 +28,20 @@
             });
             
         </script>
-        
+    </head>
+    <body>   
+        <%@include file="../../jspf/header.jspf" %>
+        <div class="content-page">
+            Hello Vote
+            
+              <%=request.getParameter("name")%>
+              <%=request.getParameter("lastname")%>
+              <%=request.getParameter("type")%>
+              <%=request.getParameter("last_login")%>
+              <%=request.getParameter("cedula")%>
+            
+            
+        </div>
+        <%@include file="../../jspf/foother.jspf" %>
     </body>
 </html>
