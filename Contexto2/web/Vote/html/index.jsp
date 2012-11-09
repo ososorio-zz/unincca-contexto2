@@ -17,5 +17,28 @@
     </head>
     <body>
         <h1>Hello Vote!</h1>
+        
+        <%=request.getParameter("name")%>
+        <%=request.getParameter("lastname")%>
+        <%=request.getParameter("type")%>
+        <%=request.getParameter("last_login")%>
+        <%=request.getParameter("cedula")%>
+        
+        <script type="text/javascript">
+            
+            var userInfo={
+            "name":' <%=request.getParameter("name")%>',
+            "lastname":'<%=request.getParameter("lastname")%>',
+            "type":'<%=request.getParameter("type")%>',
+            "last_ogin":'<%=request.getParameter("last_login")%>',
+            "cedula":'<%=request.getParameter("cedula")%>'    
+            };
+            
+            $(document).ready(function() {
+                alert("Wellcome: "+userInfo.name);
+            });
+            
+        </script>
+        
     </body>
 </html>
