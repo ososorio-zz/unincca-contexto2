@@ -164,6 +164,7 @@ loginObject={
               {
                if(response.userInfo){
                   loginObject.userInfo =response.userInfo;
+                  loginObject.userInfo.cedula=user;
                   }
                   
                 if(response.userInfo && response.userInfo.last_login == "0")
