@@ -1,11 +1,13 @@
 <%-- 
     Document   : index
-    Created on : 11/11/2012, 02:47:31 PM
-    Author     : DACC
+    Created on : 14/09/2012, 06:20:33 PM
+    Author     : diego
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
