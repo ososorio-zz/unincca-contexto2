@@ -12,7 +12,8 @@ public enum EnumOperations2 {
 
     candidato,
     lista_candidato,
-    lista;
+    lista,
+    listar_votacion_candidatos;
 
     public static EnumOperations2 fromInteger(int x) {
         switch (x) {
@@ -22,6 +23,8 @@ public enum EnumOperations2 {
                 return lista;
             case 2:
                 return lista_candidato;
+            case 3:
+                return listar_votacion_candidatos;
         }
         return null;
     }

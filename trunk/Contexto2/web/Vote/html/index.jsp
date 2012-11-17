@@ -24,7 +24,46 @@
             };
             
             $(document).ready(function() {
-                alert("Wellcome: "+userInfo.name);
+   
+                  var json=  {
+              "ac": 0,
+              "op": 0,
+              "data": {
+                "cedula": userInfo.cedula
+   
+              }
+         };
+                
+                alert (userInfo.cedula);
+            $.ajax({
+                
+          
+                              type: "POST",
+                              url: $("#urlsend").val(),
+                              data: json
+                           
+                              
+                            }).done(function( msg ) {
+                             // alert( "Data Saved: " + msg );
+                              //console.info(msg);
+                              try{
+                               $("#response").val(JSON.stringify(msg));
+                               alert(msg);
+                              }catch(e)
+                              {
+                               $("#response").val(msg);
+                              }
+                            });
+                    
+          
+          
+          
+          
+          
+          
+          
+          
+          
             });
             
         </script>

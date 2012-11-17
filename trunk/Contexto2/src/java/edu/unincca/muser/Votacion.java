@@ -19,14 +19,14 @@ public class Votacion implements IFactory {
 
     /* 
     
-    {
-    "ac": 3,
-    "op": 0,
-    "data": {
-    "user": "test",
-    "pass": "test"
-    }
-    }    
+     {
+     "ac": 3,
+     "op": 0,
+     "data": {
+     "user": "test",
+     "pass": "test"
+     }
+     }    
      */
     private HttpServletResponse _response;
 
@@ -39,7 +39,7 @@ public class Votacion implements IFactory {
     }
 
     public void processRequest(JSONObject jobject, HttpServletRequest request, HttpServletResponse response) {
-
+        JOptionPane.showMessageDialog(null, "llego");
         try {
             setResponse(response);
             //op:operation
@@ -59,6 +59,10 @@ public class Votacion implements IFactory {
                     break;
                 case lista_candidato:
                     writeResponse(new List_Candidates().getResponse(jobject));
+                    break;
+                case listar_votacion_candidatos:
+                    JOptionPane.showMessageDialog(null, "llego al otro");
+                    writeResponse(new List_votacion().getResponse(jobject));
                     break;
 
             }
