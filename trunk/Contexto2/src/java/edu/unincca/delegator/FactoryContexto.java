@@ -7,6 +7,7 @@ package edu.unincca.delegator;
 import edu.unincca.interfaces.IFactory;
 import edu.unincca.mauthentication.MAuthentication;
 import edu.unincca.mfunctionsopen.Mfunctionsopen;
+import edu.unincca.muser.MUser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 import org.json.JSONObject;
 
 /**
@@ -83,7 +83,7 @@ public class FactoryContexto implements IFactory {
                     break;
 
                 case _MUser:
-                  
+                  action = new MUser();
                     break;
 
 
