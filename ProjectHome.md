@@ -1,0 +1,1 @@
+proyect related about the system o Votes this is a academical exercise
